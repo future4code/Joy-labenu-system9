@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { v4 as generateId } from 'uuid';
-import { Turma } from "../classes/Turma";
-import connection from "../data/connection";
+import { Turma } from "../../classes/Turma";
+import connection from "../../data/connection";
 
 const app = express();
 app.use(express.json());
@@ -15,7 +15,7 @@ app.use(cors());
       const nome = req.body.nome;
       const modulo = req.body.modulo;
 
-      await connection("turma").insert ({
+      await connection("labenu_system_turma").insert ({
           id,
           nome,
           modulo

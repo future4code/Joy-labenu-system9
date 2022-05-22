@@ -5,8 +5,13 @@ export class Estudante {
     private email: string,
     private data_nasc: string,
     private turma_id: string,
-    private hobbies: string[]
-  ) {}
+  ) {
+    this.id = id
+    this.nome = nome
+    this.email = email
+    this.data_nasc = data_nasc
+    this.turma_id = turma_id
+  }
 
   public getID() {
     return this.id;
@@ -20,10 +25,6 @@ export class Estudante {
     return this.email;
   }
 
-  public setEmail(email: string) {
-    this.email = email;
-  }
-
   public getDataNasc() {
     return this.data_nasc;
   }
@@ -32,15 +33,4 @@ export class Estudante {
     return this.turma_id;
   }
 
-  public setTurmaID(turma_ID: string) {
-    this.turma_id = turma_ID;
-  }
-
-  public getHobbies() {
-    return this.hobbies;
-  }
-
-  public setHobbies(hobbie: string) {
-    this.hobbies.push(hobbie);
-  }
 }

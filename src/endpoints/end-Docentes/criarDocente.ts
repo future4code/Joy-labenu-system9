@@ -1,53 +1,47 @@
 import{Request, Response} from "express"
 import {v4 as generator} from "uuid"
-import { Docente } from "../../classes/Docentes"
+import { Docente } from "../../classes/docente/Docentes"
+import { DocenteEspecialidade } from "../../classes/docente/DocentesEspecialidades";
+import { Especialidades } from "../../classes/docente/Especialidades";
 import connection from "../../data/connection";
 
 export async function criarDocente(req:Request,
     res:Response):Promise<void>{
         try {
-            const {nome, email,data_nasc,turma_id,especialidades} = req.body
-            if(!nome){
-                throw new Error("Informe um nome.");
-                
-            }
-            if(!email){
-                throw new Error("Informe um email.");
-            }
-            if(!email.includes("@")){
-                res.statusCode = 401
-                throw new Error("Seu email deve ter um '@'");
-                
-            }
-            if(!data_nasc.includes("/")){
-                throw new Error("a data de nascimento dever passado DD/MM/AA.");
-                
-            }
-            if(!turma_id){
-                throw new Error("Informe uma id de turma.");
-                
-            }
-            if(!especialidades){
-                throw new Error("Informe as especialdidades")
-            }
-
-            const turma = await connection("labenu_system_docente").select("nome").where({"nome": nome})
-            
-            if(!turma){
-                throw new Error("informe uma turma");
-                
-            }
-
+            const {nome, email,data_nasc,turma_id,especialidade} = req.body
+           
             const novoDocente = new Docente(
                 generator(),
                 nome,
                 email,
                 data_nasc,
-                turma_id,
-                especialidades
+                turma_id
+            )
+            const listaEspecialidades = await connection("labenu_system_especialidades").select();
+
+            let Especialidade = listaEspecialidades.filter(espec => {
+                return espec.nome === especialidade
+            })[0]
+
+            if(!Especialidade){
+                Especialidade = new Especialidades(
+                    generator(),
+                    especialidade
+                )
+                await connection("labenu_system_especialidades").insert(Especialidade)
+
+            }
+            
+
+            const docenteEspecialidade = new DocenteEspecialidade(
+                generator(),
+                novoDocente.getId(),
+                Especialidade.id
             )
 
-            await connection("labenu_system_docente").insert(novoDocente)
+            await connection("labenu_system_docentes").insert(novoDocente)
+
+            await connection("labenu_system_docente_especialidades").insert(docenteEspecialidade)
 
             res.status(201).send("Docente adicionado!")
 
