@@ -4,6 +4,7 @@ export class Turma {
     private docentes: string[];
     private estudantes: string[];
     private modulo: number = 0;
+    static nome: any;
   
     constructor(
         id: string,

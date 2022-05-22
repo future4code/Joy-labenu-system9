@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { v4 as generateId } from 'uuid';
-import { Turma } from "../classes/Turma";
-import connection from "../data/connection";
+import { Turma } from "../../classes/Turma";
+import connection from "../../data/connection";
 
 const app = express();
 app.use(express.json());
