@@ -13,7 +13,7 @@ app.use(cors());
     try {
       const novoModulo = req.body.modulo;
 
-      await connection("turma").update({
+      await connection("labenu_system_turma").update({
         modulo: novoModulo
       })
       .where({ nome: req.params.nome });
