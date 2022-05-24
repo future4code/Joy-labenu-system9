@@ -1,5 +1,5 @@
 import {Request, Response} from "express"
-import { Estudante } from "../../classes/estudantes/Estudante"
+import { Estudante } from "../../classes/Estudante"
 import connection from "../../data/connection"
 
 export async function pegarEstudantes(req: Request, res: Response):Promise<void>{
@@ -11,7 +11,8 @@ export async function pegarEstudantes(req: Request, res: Response):Promise<void>
                 estudante.nome,
                 estudante.email,
                 estudante.data_nasc,
-                estudante.turma_id
+                estudante.turma_id,
+                estudante.hobbies
             )
         })
         res.send(mapEstudante)

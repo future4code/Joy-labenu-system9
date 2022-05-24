@@ -1,5 +1,5 @@
 import {Request, Response} from "express"
-import { Docente } from "../../classes/docente/Docentes"
+import { Docente } from "../../classes/Docentes"
 import connection from "../../data/connection"
 
 export async function atuatizarTurma(req:Request, res:Response):Promise<void>{
