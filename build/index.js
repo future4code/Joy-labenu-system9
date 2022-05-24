@@ -1,0 +1,31 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const app_1 = require("./app");
+const criarTurma_1 = __importDefault(require("./endpoints/end-Turma/criarTurma"));
+const atualizarDocente_1 = require("./endpoints/end-Docentes/atualizarDocente");
+const criarDocente_1 = require("./endpoints/end-Docentes/criarDocente");
+const pegarDocentes_1 = require("./endpoints/end-Docentes/pegarDocentes");
+const mudarModuloTurma_1 = __importDefault(require("./endpoints/end-Turma/mudarModuloTurma"));
+const pegarTurmas_1 = require("./endpoints/end-Turma/pegarTurmas");
+const deletar_1 = require("./endpoints/end-Docentes/deletar");
+const pegarEstudantes_1 = require("./endpoints/end-estudantes/pegarEstudantes");
+const criarEstudantes_1 = require("./endpoints/end-estudantes/criarEstudantes");
+const atualizarEstudantes_1 = require("./endpoints/end-estudantes/atualizarEstudantes");
+const deletarEstudante_1 = require("./endpoints/end-estudantes/deletarEstudante");
+app_1.app.post("/turma", criarTurma_1.default);
+app_1.app.get("/turma", pegarTurmas_1.pegarTurmas);
+app_1.app.put("/edit/:nome", mudarModuloTurma_1.default);
+app_1.app.get("/docente", pegarDocentes_1.pegarDocentes);
+app_1.app.get("/docente/:idTurma", pegarTurmas_1.getDocentesByClass);
+app_1.app.post("/docente", criarDocente_1.criarDocente);
+app_1.app.put("/docente/:id", atualizarDocente_1.atuatizarTurma);
+app_1.app.delete("/docente/:id", deletar_1.deletar);
+app_1.app.get("/estudante", pegarEstudantes_1.pegarEstudantes);
+app_1.app.get("/estudante:idTurma", pegarTurmas_1.getEstudantesByClass);
+app_1.app.post("/estudante", criarEstudantes_1.criarEstudantes);
+app_1.app.put("/estudante/:id", atualizarEstudantes_1.atualizarTurmaEstudante);
+app_1.app.delete("/estudante/:id", deletarEstudante_1.deletarEstudante);
+//# sourceMappingURL=index.js.map
